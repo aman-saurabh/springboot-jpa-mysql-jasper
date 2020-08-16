@@ -1,13 +1,12 @@
 package com.techpassel.springbootjpamysql.repository;
 
 import java.util.List;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 import com.techpassel.springbootjpamysql.model.User;
 
-public interface UserRepo extends CrudRepository<User, Integer> {
+public interface UserRepo extends JpaRepository<User, Integer> {
 	//You don't need to define explicitly "findById()" method.It is already defined in CrudRepository.
 	User findByName(String name);
 	

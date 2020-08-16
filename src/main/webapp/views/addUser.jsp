@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<div style="text-align:center">
+<a href="http://localhost:8080/employees"><button>Go To Employee Section</button></a>
+</div>
 <title>Add User</title>
 </head>
 <body>
