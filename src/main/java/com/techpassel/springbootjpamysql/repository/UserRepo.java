@@ -21,6 +21,7 @@ public interface UserRepo extends CrudRepository<User, Integer> {
 	
 	@Query("from User where name=?1 order by name")
 	List<User> findByNameSorted(String name);
+	//Here "?1" represents 1st argument, similarly if it had second argument you could have used it like "id=?2"
 	
 	
 }
