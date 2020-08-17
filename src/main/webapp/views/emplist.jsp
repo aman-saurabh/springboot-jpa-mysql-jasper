@@ -1,3 +1,4 @@
+<%@page import="com.techpassel.springbootjpamysql.model.BlogPost"%>
 <%@page import="com.techpassel.springbootjpamysql.model.Technology"%>
 <%@page import="java.util.List"%>
 <%@page import="com.techpassel.springbootjpamysql.model.EmployeeDetails"%>
@@ -18,12 +19,13 @@
 	for(Employee e: elist){
 		EmployeeDetails ed = e.getEmpdetails();	
 		List<Technology> eTechs = ed.getTechnologies();
+		List<BlogPost> blogs = ed.getBlogpost();
 %>
 		<div>Employee Name : <%=e.getEmpName() %></div>
 		<div>Employee Email : <%=e.getEmail() %></div>
 		<div>Employee Post: <%=ed.getPost() %></div>
 		<div>Employee Salary: <%=ed.getSalary() %></div>
-		<div>Employee Technologies</div>
+		<div><b>Employee Technologies</b></div>
 <%		
 		int count = 0;
 		for(Technology t: eTechs){
@@ -31,9 +33,18 @@
 			String tName = t.getTechnology();
 %>
 			<div><%=count %>. &nbsp;&nbsp;&nbsp;<%=tName %></div>
-<% 	} %>
+<% } %>
+<div><b>Blog Posts of Employee</b></div>
+<%		
+		int blogCount = 0;
+		for(BlogPost blog: blogs){
+			blogCount++;
+			String title = blog.getTitle();
+		%>
+		<div><%=blogCount %>. &nbsp;&nbsp;&nbsp; <%=title %></div>
+<% } %>		
 		</br>
-<%		} %>
+<% } %>
 </div>
 </body>
 </html>

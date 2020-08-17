@@ -1,8 +1,6 @@
 package com.techpassel.springbootjpamysql.model;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,9 +19,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "employee")
-public class Employee implements Serializable {
-	private static final long serialVersionUID = -1546810303299722402L;
-
+public class Employee {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

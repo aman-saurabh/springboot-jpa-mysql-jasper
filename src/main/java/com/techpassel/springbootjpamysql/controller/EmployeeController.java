@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.techpassel.springbootjpamysql.model.BlogPost;
 import com.techpassel.springbootjpamysql.model.Employee;
 import com.techpassel.springbootjpamysql.model.EmployeeDetails;
 import com.techpassel.springbootjpamysql.model.Technology;
@@ -39,9 +40,17 @@ public class EmployeeController {
 	
 	//Call This Method to add Employees.
 	@RequestMapping("add-employee")
-	public String addEmployee() {
-		Employee employee = new Employee("Ravi","ravi@gmail.com");
-		EmployeeDetails empDetails = new EmployeeDetails("Cangalore","JDE",35000);		
+	public void addEmployee() {
+		String name = "Ravi";
+		String email = "ravi@gmail.com";
+		String location = "Noida";
+		String post = "SDE";
+		int salary = 40000;
+		String[] techNames = {"Python", "NodeJs", "Java", "Ruby"};
+		String[][] blogs = {{"Why Java is awesome.", "Blah Blah Blah...."},{"Python, The future of AI.", "Blah Blah Blah...."}};
+		
+		Employee employee = new Employee(name,email);
+		EmployeeDetails empDetails = new EmployeeDetails(location,post,salary);		
 		// To set child reference in parent entity - OneToOne
 		employee.setEmpdetails(empDetails);
 		// To set parent reference in child entity -OneToOne
@@ -51,7 +60,7 @@ public class EmployeeController {
 		edl.add(empDetails);
 		
 		List<Technology> techs = new ArrayList<Technology>();
-		String[] techNames = {"PHP", "Java", "Flutter"};
+		
 		List<Technology> allTechs = techRepo.findAll(); 
 		for (String s: techNames) {
 			Technology tech = new Technology(s);
@@ -72,9 +81,18 @@ public class EmployeeController {
 		// To set parent reference in child entity -ManyToMany
 		empDetails.setTechnologies(techs);
 		
+		List<BlogPost> bposts = new ArrayList<BlogPost>();
+		for (String[] b : blogs) {
+			BlogPost bp = new BlogPost(b[0], b[1]);
+			// To set child reference in parent entity - ManyToOne
+			bp.setEmpDetails(empDetails);
+			bposts.add(bp);
+		}
+		
+		empDetails.setBlogpost(bposts);
+			
 		// Save Parent Reference (which will save the child as well)
 		// We can use save method to save new data as well as for modifying existing data.
         empRepo.save(employee);
-		return "Employee added successfully";
 	}
 }

@@ -1,6 +1,5 @@
 package com.techpassel.springbootjpamysql.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,18 +13,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "emp_details")
-public class EmployeeDetails implements Serializable{
-	private static final long serialVersionUID = 2742227390645621450L;
+public class EmployeeDetails {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 	
 	@Size(max = 32)
@@ -56,6 +54,10 @@ public class EmployeeDetails implements Serializable{
 	// ManyToMany relationship is managed by a third table which we configure with @JoinTable annotation. 
 	// Above code will create an extra table "emp_tech" especially to manage relationships between EmployeeDetails and Technology Entities 
 		
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="empDetails")
+	List<BlogPost> blogpost;
+    
+	
 	public EmployeeDetails() {
 		super();
 	}
@@ -114,6 +116,14 @@ public class EmployeeDetails implements Serializable{
 
 	public void setTechnologies(List<Technology> technologies) {
 		this.technologies = technologies;
+	}
+
+	public List<BlogPost> getBlogpost() {
+		return blogpost;
+	}
+
+	public void setBlogpost(List<BlogPost> blogpost) {
+		this.blogpost = blogpost;
 	}
 		
 }
