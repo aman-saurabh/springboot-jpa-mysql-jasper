@@ -53,7 +53,8 @@ public class Employee implements Serializable {
 	private EmployeeDetails empdetails;
 	//fetch = FetchType.LAZY - Fetch the related entity lazily from the database.
 	//cascade = CascadeType.ALL -> Whenever we update/delete a Employee entity, update/delete the corresponding EmployeeDetails as well
-	//mappedBy = "employ" -> To tell hibernate that the Employee entity is not responsible for this relationship and It should look for a field named "employ" in the EmployeeDetails entity to find the configuration for the Join Column/ForeignKey Column
+	//mappedBy = "employ" -> To tell hibernate that the Employee entity is not responsible(i.e owner) for this relationship and It should look for a field named "employ" in the EmployeeDetails entity to find the configuration for the Join Column/ForeignKey Column
+	//We can make any of the entity as owner.In this case we have made EmployeeDetails Entity as owner and simply passed the responsibility to that by using "mappedBy" attribute.
 	
 	public Employee() {
 		super();
